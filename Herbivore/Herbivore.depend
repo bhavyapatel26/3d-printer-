@@ -1,0 +1,81 @@
+# depslib dependency file v1.0
+1458523312 source:/home/pi/Herbivore/main.cpp
+	<iostream>
+	<exception>
+	<cstdlib>
+	<cstring>
+	<unistd.h>
+	<sys/select.h>
+	<termios.h>
+	<boost/bind.hpp>
+	<boost/asio.hpp>
+	<boost/thread/thread.hpp>
+	<wiringPi.h>
+	<wiringPiI2C.h>
+	<wiringPiSPI.h>
+	<wiringSerial.h>
+	"PlannerThread.h"
+	"ServerCommThread.h"
+	"MotorControllerInterface.h"
+
+1458524426 source:/home/pi/Herbivore/ImageCaptureThread.cpp
+	"ImageCaptureThread.h"
+	<iostream>
+	<wiringPi.h>
+
+1458522646 /home/pi/Herbivore/ImageCaptureThread.h
+	<opencv2/highgui/highgui.hpp>
+	<boost/thread/thread.hpp>
+	<boost/thread/mutex.hpp>
+	"ServerCommThread.h"
+
+1458502531 source:/home/pi/Herbivore/GPSCommThread.cpp
+	"GPSCommThread.h"
+	<stdio.h>
+
+1458502531 /home/pi/Herbivore/GPSCommThread.h
+	<boost/thread/thread.hpp>
+	<boost/thread/mutex.hpp>
+
+1458523312 source:/home/pi/Herbivore/MotorControllerInterface.cpp
+	"MotorControllerInterface.h"
+	<wiringPi.h>
+	<wiringPiSPI.h>
+
+1458498775 /home/pi/Herbivore/MotorControllerInterface.h
+
+1458524426 source:/home/pi/Herbivore/PlannerThread.cpp
+	"PlannerThread.h"
+	<boost/bind.hpp>
+	"MotorControllerInterface.h"
+	"SensorControllerInterface.h"
+
+1458524426 /home/pi/Herbivore/PlannerThread.h
+	<boost/thread/thread.hpp>
+	<boost/thread/mutex.hpp>
+	<queue>
+	<utility>
+	<cstring>
+	"GPSCommThread.h"
+	"ImageCaptureThread.h"
+	"ServerCommThread.h"
+
+1458523635 source:/home/pi/Herbivore/SensorControllerInterface.cpp
+	"SensorControllerInterface.h"
+	<wiringPi.h>
+	<wiringPiSPI.h>
+	<wiringPiI2C.h>
+
+1458523312 /home/pi/Herbivore/SensorControllerInterface.h
+
+1458525092 source:/home/pi/Herbivore/ServerCommThread.cpp
+	"ServerCommThread.h"
+
+1458525620 /home/pi/Herbivore/ServerCommThread.h
+	<boost/bind.hpp>
+	<boost/asio.hpp>
+	<boost/thread/thread.hpp>
+	<opencv2/highgui/highgui.hpp>
+	<queue>
+	<cstring>
+

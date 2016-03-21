@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Herbivore" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Herbivore" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-lboost_date_time -lboost_system -lboost_thread -lpthread -lwiringPi `pkg-config --libs opencv`" />
+					<Add directory="/usr/lib" />
+					<Add directory="/usr/include/boost" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Herbivore" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DRELEASE" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-lboost_date_time -lboost_system -lboost_thread -lpthread -lwiringPi `pkg-config --libs opencv`" />
+					<Add directory="/usr/lib" />
+					<Add directory="/usr/include/boost" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="GPSCommThread.cpp" />
+		<Unit filename="GPSCommThread.h" />
+		<Unit filename="ImageCaptureThread.cpp" />
+		<Unit filename="ImageCaptureThread.h" />
+		<Unit filename="MotorControllerInterface.cpp" />
+		<Unit filename="MotorControllerInterface.h" />
+		<Unit filename="PlannerThread.cpp" />
+		<Unit filename="PlannerThread.h" />
+		<Unit filename="SensorControllerInterface.cpp" />
+		<Unit filename="SensorControllerInterface.h" />
+		<Unit filename="ServerCommThread.cpp" />
+		<Unit filename="ServerCommThread.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
