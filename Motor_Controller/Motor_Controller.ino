@@ -9,14 +9,22 @@
 #define RIGHT_DRIVE_DIR_PIN   8
 #define RIGHT_DRIVE_PWM_PIN   9
 
-#define NUM_MOTORS  3
+#define PUMP_DRIVE_PWM_PIN    6
+#define PUMP_DRIVE_DIR_PIN    A1
+
+#define HEARTBEAT_PIN         A0
 
 enum
 {
   LEFT_DRIVE = 0,
   RIGHT_DRIVE,
-  DRILL_DRIVE
+  DRILL_DRIVE,
+  PUMP_DRIVE,
+  NUM_MOTORS
 };
+
+byte motorPWMPin[] = {LEFT_DRIVE_PWM_PIN, RIGHT_DRIVE_PWM_PIN, DRILL_DRIVE_PWM_PIN, PUMP_DRIVE_PWM_PIN};
+byte motorDirPin[] = {LEFT_DRIVE_DIR_PIN, RIGHT_DRIVE_DIR_PIN, DRILL_DRIVE_DIR_PIN, PUMP_DRIVE_DIR_PIN};
 
 enum
 {
@@ -39,6 +47,9 @@ volatile byte arg1, arg2;
 volatile byte motorPower[NUM_MOTORS], motorDir[NUM_MOTORS];
 
 volatile bool updateNeeded = false;
+volatile byte updateMotor = 0;
+
+long lastHeartbeat = 0;
 
 void setup (void)
 {
@@ -53,6 +64,19 @@ void setup (void)
   pinMode(SCK, INPUT);
   pinMode(CS, INPUT);
 
+  pinMode(HEARTBEAT_PIN, OUTPUT);
+
+  pinMode(DRILL_ENDSTOP_PIN, INPUT);
+  
+  for(int i = 0; i < NUM_MOTORS; i++)
+  {
+    pinMode(motorPWMPin[i], OUTPUT);
+    pinMode(motorDirPin[i], OUTPUT);
+    
+    digitalWrite(motorPWMPin[i], LOW);
+    digitalWrite(motorDirPin[i], LOW);
+  }
+
   // now turn on interrupts
   SPI.attachInterrupt();
 }
@@ -62,6 +86,10 @@ void setup (void)
 ISR (SPI_STC_vect)
 {
   byte c = SPDR;  // grab byte from SPI Data Register
+  
+  Serial.print(state);
+  Serial.print('\t');
+  Serial.println(c);
   
   switch(state)
   {
@@ -108,30 +136,38 @@ ISR (SPI_STC_vect)
 
 void loop (void)
 {
-  if(digitalRead(CS))
+  if(state != 0 && digitalRead(CS) == HIGH)
   {
-    cli();
     state = 0;
-    sei();
+  }
+  
+  if(millis() - lastHeartbeat > 1000)
+  {
+    lastHeartbeat = millis();
+    digitalWrite(HEARTBEAT_PIN, !digitalRead(HEARTBEAT_PIN));
+  }
+  
+  if(updateNeeded)
+  {
+    updateNeeded = false;
+    
+    digitalWrite(motorDirPin[updateMotor], motorDir[updateMotor]);
+    analogWrite(motorPWMPin[updateMotor], motorPower[updateMotor]);
   }
 }
 
 inline void setMotorPower(byte motorIndex, byte power)
-{
-  Serial.print("Motor Power Command\tIndex: ");
-  Serial.print(motorIndex);
-  Serial.print("\tPower: ");
-  Serial.println(power);
-  
+{  
   motorPower[motorIndex] = power;
+  
+  updateNeeded = true;
+  updateMotor = motorIndex;
 }
 
 inline void setMotorDir(byte motorIndex, byte dir)
 {
-  Serial.print("Motor Dir Command\tIndex: ");
-  Serial.print(motorIndex);
-  Serial.print("\Dir: ");
-  Serial.println(dir);  
-  
   motorDir[motorIndex] = dir;
+  
+  updateNeeded = true;
+  updateMotor = motorIndex;
 }
