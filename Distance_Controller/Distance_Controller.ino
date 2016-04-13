@@ -3,19 +3,20 @@
 #define CS                    10
 #define BASE_SENSOR_PIN       2
 
-#define HEARTBEAT_PIN         A0
+#define HEARTBEAT_PIN         A3
 
 #define NUM_MOTORS  3
 
 enum
 {
-  FRONT_RIGHT_SEN = 0,
-  FRONT_LEFT_SEN,
+  FRONT_LEFT_SEN = 0,
+  FRONT_RIGHT_SEN,
   LEFT_LEFT_SEN,
   LEFT_RIGHT_SEN,
   RIGHT_LEFT_SEN,
   RIGHT_RIGHT_SEN,
   BOTTOM_SEN,
+  REAR_SEN,
   NUM_SENSORS
 };
 
@@ -139,5 +140,5 @@ void loop (void)
       distanceReading[i] = pulse(i + BASE_SENSOR_PIN);
     }
     updateNeeded = false;
-  }  
+  }
 }

@@ -5,14 +5,14 @@
 #define LEFT_DRIVE_PWM_PIN    3
 #define LEFT_DRIVE_DIR_PIN    4
 #define DRILL_DRIVE_PWM_PIN   5
-#define DRILL_DRIVE_DIR_PIN   7
+#define DRILL_DRIVE_DIR_PIN   A1
 #define RIGHT_DRIVE_DIR_PIN   8
 #define RIGHT_DRIVE_PWM_PIN   9
 
 #define PUMP_DRIVE_PWM_PIN    6
-#define PUMP_DRIVE_DIR_PIN    A1
+#define PUMP_DRIVE_DIR_PIN    7
 
-#define HEARTBEAT_PIN         A0
+#define HEARTBEAT_PIN         A2
 
 enum
 {
@@ -159,15 +159,13 @@ void loop (void)
 inline void setMotorPower(byte motorIndex, byte power)
 {  
   motorPower[motorIndex] = power;
-  
-  updateNeeded = true;
-  updateMotor = motorIndex;
+
+  analogWrite(motorPWMPin[motorIndex], power);
 }
 
 inline void setMotorDir(byte motorIndex, byte dir)
 {
   motorDir[motorIndex] = dir;
-  
-  updateNeeded = true;
-  updateMotor = motorIndex;
+
+  digitalWrite(motorDirPin[motorIndex], dir);
 }
