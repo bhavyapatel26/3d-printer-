@@ -48,6 +48,8 @@
 		<Unit filename="ImageCaptureThread.h" />
 		<Unit filename="MotorControllerInterface.cpp" />
 		<Unit filename="MotorControllerInterface.h" />
+		<Unit filename="PID.cpp" />
+		<Unit filename="PID.h" />
 		<Unit filename="PlannerThread.cpp" />
 		<Unit filename="PlannerThread.h" />
 		<Unit filename="SensorControllerInterface.cpp" />
