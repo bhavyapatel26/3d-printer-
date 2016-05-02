@@ -1,0 +1,431 @@
+
+MotorController.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  0000024e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000001da  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000000c  00800100  00800100  0000024e  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000024e  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000280  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000038  00000000  00000000  000002bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000001ec  00000000  00000000  000002f4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000000da  00000000  00000000  000004e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000124  00000000  00000000  000005ba  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000054  00000000  00000000  000006e0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000227  00000000  00000000  00000734  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000038  00000000  00000000  0000095b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000028  00000000  00000000  00000993  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	ac 30       	cpi	r26, 0x0C	; 12
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 d7 00 	call	0x1ae	; 0x1ae <main>
+  88:	0c 94 eb 00 	jmp	0x1d6	; 0x1d6 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <setupTimers>:
+unsigned char motorPower[NUM_MOTORS], motorDir[NUM_MOTORS];
+
+void setupTimers(void)
+{
+	//Timer 0 PORTD5 (B)(Drill Drive) PORTD6 (A)(Pump Drive)
+	TCCR0A = (1 << COM0A1) | (1 << COM0B1) | (1 << WGM01) | (1 << WGM00);
+  90:	83 ea       	ldi	r24, 0xA3	; 163
+  92:	84 bd       	out	0x24, r24	; 36
+	OCR0A = 0;
+  94:	17 bc       	out	0x27, r1	; 39
+	OCR0B = 0;
+  96:	18 bc       	out	0x28, r1	; 40
+	TCCR0B = (1 << CS00) | (1 << CS01);
+  98:	83 e0       	ldi	r24, 0x03	; 3
+  9a:	85 bd       	out	0x25, r24	; 37
+	
+	//Timer 1 PORTB1 (A)(Right Drive)
+	TCCR1A = (1 << COM1A1) | (1 << WGM10);
+  9c:	91 e8       	ldi	r25, 0x81	; 129
+  9e:	90 93 80 00 	sts	0x0080, r25
+	OCR1A = 0;
+  a2:	10 92 89 00 	sts	0x0089, r1
+  a6:	10 92 88 00 	sts	0x0088, r1
+	TCCR1B = (1 << WGM12) | (1 << CS10) | (1 << CS11);
+  aa:	9b e0       	ldi	r25, 0x0B	; 11
+  ac:	90 93 81 00 	sts	0x0081, r25
+	
+	//Timer 2  PORTD3 (B)(Left Drive)
+	TCCR2A = (1 << COM2B1) | (1 << WGM21) | (1 << WGM20);
+  b0:	93 e2       	ldi	r25, 0x23	; 35
+  b2:	90 93 b0 00 	sts	0x00B0, r25
+	OCR2B = 0;
+  b6:	10 92 b4 00 	sts	0x00B4, r1
+	TCCR2B = (1 << CS20) | (1 << CS21);
+  ba:	80 93 b1 00 	sts	0x00B1, r24
+  be:	08 95       	ret
+
+000000c0 <SPI_SlaveInit>:
+}
+
+void SPI_SlaveInit(void)
+{
+	sbi(DDRB, PORTB3);
+  c0:	23 9a       	sbi	0x04, 3	; 4
+	
+	cbi(DDRB, PORTB5);
+  c2:	25 98       	cbi	0x04, 5	; 4
+	sbi(PORTB, PORTB5);
+  c4:	2d 9a       	sbi	0x05, 5	; 5
+	
+	cbi(DDRB, PORTB4);
+  c6:	24 98       	cbi	0x04, 4	; 4
+	sbi(PORTB, PORTB4);
+  c8:	2c 9a       	sbi	0x05, 4	; 5
+	
+	cbi(DDRB, PORTB2);
+  ca:	22 98       	cbi	0x04, 2	; 4
+	sbi(PORTB, PORTB2);
+  cc:	2a 9a       	sbi	0x05, 2	; 5
+	
+	SPCR = (1 << SPE);
+  ce:	80 e4       	ldi	r24, 0x40	; 64
+  d0:	8c bd       	out	0x2c, r24	; 44
+  d2:	08 95       	ret
+
+000000d4 <SPI_SlaveReceive>:
+}
+
+void SPI_SlaveReceive(void)
+{
+	unsigned char c;
+	while(!(SPSR & (1<<SPIF)))
+  d4:	03 c0       	rjmp	.+6      	; 0xdc <SPI_SlaveReceive+0x8>
+	{
+		if((PINB & (1 << PINB2)))
+  d6:	1a 99       	sbic	0x03, 2	; 3
+			state = 0;
+  d8:	10 92 01 01 	sts	0x0101, r1
+}
+
+void SPI_SlaveReceive(void)
+{
+	unsigned char c;
+	while(!(SPSR & (1<<SPIF)))
+  dc:	0d b4       	in	r0, 0x2d	; 45
+  de:	07 fe       	sbrs	r0, 7
+  e0:	fa cf       	rjmp	.-12     	; 0xd6 <SPI_SlaveReceive+0x2>
+	{
+		if((PINB & (1 << PINB2)))
+			state = 0;
+	}
+	
+	c = SPDR;
+  e2:	9e b5       	in	r25, 0x2e	; 46
+	
+	switch(state)
+  e4:	80 91 01 01 	lds	r24, 0x0101
+  e8:	81 30       	cpi	r24, 0x01	; 1
+  ea:	51 f0       	breq	.+20     	; 0x100 <SPI_SlaveReceive+0x2c>
+  ec:	18 f0       	brcs	.+6      	; 0xf4 <SPI_SlaveReceive+0x20>
+  ee:	82 30       	cpi	r24, 0x02	; 2
+  f0:	69 f0       	breq	.+26     	; 0x10c <SPI_SlaveReceive+0x38>
+  f2:	08 95       	ret
+	{
+		case 0:
+		curCommand = c;
+  f4:	90 93 00 01 	sts	0x0100, r25
+		state = 1;
+  f8:	81 e0       	ldi	r24, 0x01	; 1
+  fa:	80 93 01 01 	sts	0x0101, r24
+		break;
+  fe:	08 95       	ret
+		
+		case 1:
+		arg1 = c;
+ 100:	90 93 07 01 	sts	0x0107, r25
+			
+			case GET_POWER:
+			break;
+		}
+		
+		state = 2;
+ 104:	82 e0       	ldi	r24, 0x02	; 2
+ 106:	80 93 01 01 	sts	0x0101, r24
+		break;
+ 10a:	08 95       	ret
+		
+		case 2:
+		arg2 = c;
+ 10c:	90 93 06 01 	sts	0x0106, r25
+				
+		switch(curCommand)
+ 110:	80 91 00 01 	lds	r24, 0x0100
+ 114:	81 30       	cpi	r24, 0x01	; 1
+ 116:	89 f1       	breq	.+98     	; 0x17a <SPI_SlaveReceive+0xa6>
+ 118:	82 30       	cpi	r24, 0x02	; 2
+ 11a:	09 f0       	breq	.+2      	; 0x11e <SPI_SlaveReceive+0x4a>
+ 11c:	45 c0       	rjmp	.+138    	; 0x1a8 <SPI_SlaveReceive+0xd4>
+		{
+			case SET_DIR:
+			switch(arg1)
+ 11e:	80 91 07 01 	lds	r24, 0x0107
+ 122:	81 30       	cpi	r24, 0x01	; 1
+ 124:	79 f0       	breq	.+30     	; 0x144 <SPI_SlaveReceive+0x70>
+ 126:	28 f0       	brcs	.+10     	; 0x132 <SPI_SlaveReceive+0x5e>
+ 128:	82 30       	cpi	r24, 0x02	; 2
+ 12a:	f1 f0       	breq	.+60     	; 0x168 <SPI_SlaveReceive+0x94>
+ 12c:	83 30       	cpi	r24, 0x03	; 3
+ 12e:	99 f0       	breq	.+38     	; 0x156 <SPI_SlaveReceive+0x82>
+ 130:	3b c0       	rjmp	.+118    	; 0x1a8 <SPI_SlaveReceive+0xd4>
+			{
+				case LEFT_DRIVE:
+				switch(arg2)
+ 132:	99 23       	and	r25, r25
+ 134:	19 f0       	breq	.+6      	; 0x13c <SPI_SlaveReceive+0x68>
+ 136:	91 30       	cpi	r25, 0x01	; 1
+ 138:	19 f0       	breq	.+6      	; 0x140 <SPI_SlaveReceive+0x6c>
+ 13a:	36 c0       	rjmp	.+108    	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				{
+					case FORWARD:
+					cbi(LEFT_DRIVE_DIR_PORT_REG, LEFT_DRIVE_DIR_PIN);
+ 13c:	5c 98       	cbi	0x0b, 4	; 11
+					break;
+ 13e:	34 c0       	rjmp	.+104    	; 0x1a8 <SPI_SlaveReceive+0xd4>
+					
+					case REVERSE:
+					sbi(LEFT_DRIVE_DIR_PORT_REG, LEFT_DRIVE_DIR_PIN);
+ 140:	5c 9a       	sbi	0x0b, 4	; 11
+					break;
+ 142:	32 c0       	rjmp	.+100    	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				}
+				break;
+				
+				case RIGHT_DRIVE:
+				switch(arg2)
+ 144:	99 23       	and	r25, r25
+ 146:	19 f0       	breq	.+6      	; 0x14e <SPI_SlaveReceive+0x7a>
+ 148:	91 30       	cpi	r25, 0x01	; 1
+ 14a:	19 f0       	breq	.+6      	; 0x152 <SPI_SlaveReceive+0x7e>
+ 14c:	2d c0       	rjmp	.+90     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				{
+					case FORWARD:
+					cbi(RIGHT_DRIVE_DIR_PORT_REG, RIGHT_DRIVE_DIR_PIN);
+ 14e:	28 98       	cbi	0x05, 0	; 5
+					break;
+ 150:	2b c0       	rjmp	.+86     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+					
+					case REVERSE:
+					sbi(RIGHT_DRIVE_DIR_PORT_REG, RIGHT_DRIVE_DIR_PIN);
+ 152:	28 9a       	sbi	0x05, 0	; 5
+					break;
+ 154:	29 c0       	rjmp	.+82     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				}				
+				break;
+				
+				case PUMP_DRIVE:
+				switch(arg2)
+ 156:	99 23       	and	r25, r25
+ 158:	19 f0       	breq	.+6      	; 0x160 <SPI_SlaveReceive+0x8c>
+ 15a:	91 30       	cpi	r25, 0x01	; 1
+ 15c:	19 f0       	breq	.+6      	; 0x164 <SPI_SlaveReceive+0x90>
+ 15e:	24 c0       	rjmp	.+72     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				{
+					case FORWARD:
+					cbi(PUMP_DRIVE_DIR_PORT_REG, PUMP_DRIVE_DIR_PIN);
+ 160:	5f 98       	cbi	0x0b, 7	; 11
+					break;
+ 162:	22 c0       	rjmp	.+68     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+					
+					case REVERSE:
+					sbi(PUMP_DRIVE_DIR_PORT_REG, PUMP_DRIVE_DIR_PIN);
+ 164:	5f 9a       	sbi	0x0b, 7	; 11
+					break;
+ 166:	20 c0       	rjmp	.+64     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				}				
+				break;
+				
+				case DRILL_DRIVE:
+				switch(arg2)
+ 168:	99 23       	and	r25, r25
+ 16a:	19 f0       	breq	.+6      	; 0x172 <SPI_SlaveReceive+0x9e>
+ 16c:	91 30       	cpi	r25, 0x01	; 1
+ 16e:	19 f0       	breq	.+6      	; 0x176 <SPI_SlaveReceive+0xa2>
+ 170:	1b c0       	rjmp	.+54     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				{
+					case FORWARD:
+					cbi(DRILL_DRIVE_DIR_PORT_REG, DRILL_DRIVE_DIR_PIN);
+ 172:	41 98       	cbi	0x08, 1	; 8
+					break;
+ 174:	19 c0       	rjmp	.+50     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+					
+					case REVERSE:
+					sbi(DRILL_DRIVE_DIR_PORT_REG, DRILL_DRIVE_DIR_PIN);
+ 176:	41 9a       	sbi	0x08, 1	; 8
+					break;
+ 178:	17 c0       	rjmp	.+46     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				break;
+			}
+			break;
+			
+			case SET_POWER:
+			switch(arg1)
+ 17a:	80 91 07 01 	lds	r24, 0x0107
+ 17e:	81 30       	cpi	r24, 0x01	; 1
+ 180:	49 f0       	breq	.+18     	; 0x194 <SPI_SlaveReceive+0xc0>
+ 182:	28 f0       	brcs	.+10     	; 0x18e <SPI_SlaveReceive+0xba>
+ 184:	82 30       	cpi	r24, 0x02	; 2
+ 186:	79 f0       	breq	.+30     	; 0x1a6 <SPI_SlaveReceive+0xd2>
+ 188:	83 30       	cpi	r24, 0x03	; 3
+ 18a:	59 f0       	breq	.+22     	; 0x1a2 <SPI_SlaveReceive+0xce>
+ 18c:	0d c0       	rjmp	.+26     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+			{
+				case LEFT_DRIVE:
+				LEFT_DRIVE_PWM_TIMER_REG = arg2;
+ 18e:	90 93 b4 00 	sts	0x00B4, r25
+				break;
+ 192:	0a c0       	rjmp	.+20     	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				
+				case RIGHT_DRIVE:
+				RIGHT_DRIVE_PWM_TIMER_REG = arg2;
+ 194:	89 2f       	mov	r24, r25
+ 196:	90 e0       	ldi	r25, 0x00	; 0
+ 198:	90 93 89 00 	sts	0x0089, r25
+ 19c:	80 93 88 00 	sts	0x0088, r24
+				break;
+ 1a0:	03 c0       	rjmp	.+6      	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				
+				case PUMP_DRIVE:
+				PUMP_DRIVE_PWM_TIMER_REG = arg2;
+ 1a2:	97 bd       	out	0x27, r25	; 39
+				break;
+ 1a4:	01 c0       	rjmp	.+2      	; 0x1a8 <SPI_SlaveReceive+0xd4>
+				
+				case DRILL_DRIVE:
+				DRILL_DRIVE_PWM_TIMER_REG = arg2;
+ 1a6:	98 bd       	out	0x28, r25	; 40
+				break;
+			}			
+			break;
+		}
+		
+		state = 0;
+ 1a8:	10 92 01 01 	sts	0x0101, r1
+ 1ac:	08 95       	ret
+
+000001ae <main>:
+	}
+}
+
+int main(void)
+{
+	setupTimers();
+ 1ae:	0e 94 48 00 	call	0x90	; 0x90 <setupTimers>
+	
+	cbi(DRILL_ENDSTOP_DIR_REG, DRILL_ENDSTOP_PIN);
+ 1b2:	52 98       	cbi	0x0a, 2	; 10
+	
+	sbi(LEFT_DRIVE_PWM_DIR_REG, LEFT_DRIVE_PWM_PIN);
+ 1b4:	53 9a       	sbi	0x0a, 3	; 10
+	sbi(RIGHT_DRIVE_PWM_DIR_REG, RIGHT_DRIVE_PWM_PIN);
+ 1b6:	21 9a       	sbi	0x04, 1	; 4
+	sbi(DRILL_DRIVE_PWM_DIR_REG, DRILL_DRIVE_PWM_PIN);
+ 1b8:	55 9a       	sbi	0x0a, 5	; 10
+	sbi(PUMP_DRIVE_PWM_DIR_REG, PUMP_DRIVE_PWM_PIN);
+ 1ba:	56 9a       	sbi	0x0a, 6	; 10
+	
+	sbi(LEFT_DRIVE_DIR_DIR_REG, LEFT_DRIVE_DIR_PIN);
+ 1bc:	54 9a       	sbi	0x0a, 4	; 10
+	sbi(RIGHT_DRIVE_DIR_DIR_REG, RIGHT_DRIVE_DIR_PIN);
+ 1be:	20 9a       	sbi	0x04, 0	; 4
+	sbi(DRILL_DRIVE_DIR_DIR_REG, DRILL_DRIVE_DIR_PIN);
+ 1c0:	39 9a       	sbi	0x07, 1	; 7
+	sbi(PUMP_DRIVE_DIR_DIR_REG, PUMP_DRIVE_DIR_PIN);
+ 1c2:	57 9a       	sbi	0x0a, 7	; 10
+	
+	cbi(LEFT_DRIVE_PWM_PORT_REG, LEFT_DRIVE_PWM_PIN);
+ 1c4:	5b 98       	cbi	0x0b, 3	; 11
+	cbi(RIGHT_DRIVE_PWM_PORT_REG, RIGHT_DRIVE_PWM_PIN);
+ 1c6:	29 98       	cbi	0x05, 1	; 5
+	cbi(DRILL_DRIVE_PWM_PORT_REG, DRILL_DRIVE_PWM_PIN);
+ 1c8:	5d 98       	cbi	0x0b, 5	; 11
+	cbi(PUMP_DRIVE_PWM_PORT_REG, PUMP_DRIVE_PWM_PIN);	
+ 1ca:	5e 98       	cbi	0x0b, 6	; 11
+	
+	SPI_SlaveInit();	
+ 1cc:	0e 94 60 00 	call	0xc0	; 0xc0 <SPI_SlaveInit>
+	
+    while (1) 
+    {
+		//sbi(LEFT_DRIVE_PWM_PORT_REG, LEFT_DRIVE_PWM_PIN);
+		SPI_SlaveReceive();
+ 1d0:	0e 94 6a 00 	call	0xd4	; 0xd4 <SPI_SlaveReceive>
+		//cbi(LEFT_DRIVE_PWM_PORT_REG, LEFT_DRIVE_PWM_PIN);
+    }
+ 1d4:	fd cf       	rjmp	.-6      	; 0x1d0 <main+0x22>
+
+000001d6 <_exit>:
+ 1d6:	f8 94       	cli
+
+000001d8 <__stop_program>:
+ 1d8:	ff cf       	rjmp	.-2      	; 0x1d8 <__stop_program>
